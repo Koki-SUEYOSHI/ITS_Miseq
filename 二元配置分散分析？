@@ -1,0 +1,23 @@
+library(ggplot2)
+library(gridExtra)
+data = read.table(file = "C:/Users/デスクトップ/R/test2.txt",header=TRUE, sep=",",stringsAsFactors=F)
+head(data,2)
+qqnorm(tree, ylab = "wid")
+qqnorm(tree)
+job = as.data.frame(trees)
+bartlett.test(data$tree ~ data$type)
+qqnorm(data$scores, ylab = "len")
+qqline(data$scores)
+shapiro_test <- shapiro.test(t(data$scores))
+shapiro.test()
+shapiro.test(data$scores)
+bartlett_test_tree <- bartlett.test(data$scores ~ data$tree)
+bartlett_test_type <- bartlett.test(data$scores ~ data$type)
+bartlett_test_tree
+bartlett_test_type
+anova <- anova_test(data = data, scores ~ tree + type)
+anova
+pwc <- tukey_hsd(data, scores ~ tree + type)
+pwc
+boxplot_tree <- ggboxplot(data, x="tree",y="scores",fill="tree")
+grid.arrange(boxplot_tree, nrow=1)
