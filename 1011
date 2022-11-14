@@ -118,7 +118,7 @@ dadaFs <- dada(derepFs, err = errF, multithread = TRUE)
 dadaRs <- dada(derepRs, err = errR, multithread = TRUE)
 
 #Merge paired reads
-ergers <- mergePairs(dadaFs, derepFs, dadaRs, derepRs, verbose=TRUE)
+mergers <- mergePairs(dadaFs, derepFs, dadaRs, derepRs, verbose=TRUE)
 
 #Construct Sequence Table
 seqtab <- makeSequenceTable(mergers)
