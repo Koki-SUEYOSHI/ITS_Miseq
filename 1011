@@ -9,12 +9,12 @@ packageVersion("Biostrings")
 path <- "~/Desktop/sueyoshi/for_r/ITS_pipeline/Amplicon_sequencing_library_2"  ## CHANGE ME to the directory containing the fastq files.
 list.files(path)
 
-fnFs <- sort(list.files(path, pattern = "_1.fastq.gz", full.names = TRUE))
-fnRs <- sort(list.files(path, pattern = "_2.fastq.gz", full.names = TRUE))
+fnFs <- sort(list.files(path, pattern = "_R1_001.fastq.gz", full.names = TRUE))
+fnRs <- sort(list.files(path, pattern = "_R2_001.fastq.gz", full.names = TRUE))
 
 #generate matched lists of the forward and reverse read files, as well as parsing out the sample name.
-FWD <- "ACCTGCGGARGGATCA"  ## CHANGE ME to your forward primer sequence
-REV <- "GAGATCCRTTGYTRAAAGTT"  ## CHANGE ME...
+FWD <- "GCATATCAATAAGCGGAGGA"  ## CHANGE ME to your forward primer sequence
+REV <- "CAAAGATTCGATGAYTCAC"  ## CHANGE ME...
 
 #Identify the promers
 allOrients <- function(primer) {
@@ -66,7 +66,7 @@ R2.flags <- paste("-G", REV, "-A", FWD.RC)
 for(i in seq_along(fnFs)) {
   system2(cutadapt, args = c(R1.flags, R2.flags, "-n", 2, # -n 2 required to remove FWD and REV from reads
                              "-o", fnFs.cut[i], "-p", fnRs.cut[i], # output files
-                             fnFs.filtN[i], fnRs.filtN[i])) # input files
+                             fnFs.filtN[i], fnRs.filtN[i],"--minimum-length", 1)) # input files
 }
 
 #As a sanity check, we will count the presence of primers in the first cutadapt-ed sample.
