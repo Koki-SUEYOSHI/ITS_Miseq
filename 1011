@@ -68,6 +68,7 @@ for(i in seq_along(fnFs)) {
                              "-o", fnFs.cut[i], "-p", fnRs.cut[i], # output files
                              fnFs.filtN[i], fnRs.filtN[i],"--minimum-length", 1)) # input files
 }
+#I added ","--minimum-length", 1" ,according to here(https://github.com/benjjneb/dada2/issues/1385).
 
 #As a sanity check, we will count the presence of primers in the first cutadapt-ed sample.
 rbind(FWD.ForwardReads = sapply(FWD.orients, primerHits, fn = fnFs.cut[[1]]), 
