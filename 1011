@@ -140,6 +140,7 @@ colnames(track) <- c("input", "filtered", "denoisedF", "denoisedR", "merged",
     "nonchim")
 rownames(track) <- sample.names
 head(track)
+write.table(track,file="track.txt")
 
 #Assign taxonomy
 unite.ref <- "/Users/forestry/Desktop/sueyoshi/for_r/ITS_pipeline/tax/C8E4A8E6A7C4C00EACE3499C51E550744A259A98F8FE25993B1C7B9E7D2170B2/sh_general_release_dynamic_s_01.12.2017.fasta"  # CHANGE ME to location on your machine
